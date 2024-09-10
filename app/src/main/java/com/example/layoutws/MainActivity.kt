@@ -16,14 +16,14 @@ import com.gtappdevelopers.kotlingfgproject.MyAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ButtonLayoutBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ButtonLayoutBinding.inflate(layoutInflater) // inflate the layout
+        binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
 
-//        val mAdapater = MyAdapter(this, listOf(1,2,3,4,5,6,7,8,9,10,11,12,334,45,54,45,45,4235,6,57,6756))
-//        binding.gridVW.adapter = mAdapater
+        val mAdapater = MyAdapter(this, listOf(1,2,3,4,5,6,7,8,9,10,11,12,334,45,54,45,45,4235,6,57,6756))
+        binding.gridVW.adapter = mAdapater
 
     }
 }

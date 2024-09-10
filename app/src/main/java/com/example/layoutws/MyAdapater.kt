@@ -36,10 +36,10 @@ class MyAdapter(private val context: Context, private val data: List<Int>) : Bas
         layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         Log.i("Adapter", "layoutInflator :: $layoutInflater")
         if (cView == null) {
-            cView = layoutInflater.inflate(R.layout.single_product_item,null)
+            cView = layoutInflater.inflate(R.layout.button_layout,null)
         }
         Log.i("Adapter", "cView :: $cView")
-        imageIV = cView!!.findViewById(R.id.imageView)
+        imageIV = cView!!.findViewById(R.id.imageView1)
         imageIV.setImageResource(R.drawable.hotel_svgrepo_com)
 
         return cView
