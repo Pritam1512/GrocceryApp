@@ -56,27 +56,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareDummyData() {
+
+        val imageId: IntArray = intArrayOf(
+            R.drawable.chicken_food_thanksgiving_svgrepo_com,
+            R.drawable.apple_svgrepo_com,
+            R.drawable.banana_svgrepo_com__1_,
+            R.drawable.burger_1_svgrepo_com,
+            R.drawable.chips_snack_svgrepo_com,
+            R.drawable.coke_svgrepo_com,
+            R.drawable.cookies_svgrepo_com,
+            R.drawable.fish_svgrepo_com,
+            R.drawable.fries_svgrepo_com,
+            R.drawable.tomato_svgrepo_com,
+            R.drawable.pizza_svgrepo_com,
+            R.drawable.omelette_svgrepo_com,
+            R.drawable.rice_svgrepo_com,
+            R.drawable.hotel_svgrepo_com
+        )
+        val description = arrayOf(
+            "Chicken",
+            "Apple",
+            "Banana",
+            "Burger",
+            "Chips",
+            "Coke",
+            "Cookies",
+            "Fish",
+            "Fries",
+            "Tomato",
+            "Pizza",
+            "Omelette",
+            "rice",
+            "Hotel"
+        )
+        val price = arrayOf(
+            12,34.5,54.7,23,45.33,5,56,4,5.2,46,67,34.6,5,65
+        )
+
         newList = arrayListOf() // create a list of items
-        newList.add(cartItem("First"))
-        newList.add(cartItem("Second"))
-        newList.add(cartItem("Third"))
-        newList.add(cartItem("Fourth"))
-        newList.add(cartItem("Fifth"))
-        newList.add(cartItem("Sixth"))
-        newList.add(cartItem("Seventh"))
-        newList.add(cartItem("Eighth"))
-        newList.add(cartItem("Ninth"))
-        newList.add(cartItem("Tenth"))
-        newList.add(cartItem("11th"))
-        newList.add(cartItem("12th"))
-        newList.add(cartItem("13th"))
-        newList.add(cartItem("14th"))
-        newList.add(cartItem("15th"))
-        newList.add(cartItem("16th"))
+        for(i in imageId.indices) {
+            newList.add(cartItem(imageId[i],description[i],price[i].toFloat()))
+        }
 
         cartList = arrayListOf() // create list of cart items
         cartList.add(SingleCartItems(0))
         cartList.add(SingleCartItems(1))
+        cartList.add(SingleCartItems(2))
         cartList.add(SingleCartItems(2))
 
     }
@@ -84,6 +109,9 @@ class MainActivity : AppCompatActivity() {
     private fun disbaleRecyclerViewScrolling() {
         // to disable scrolling of RV within the scrollview
         binding.itemsRV.isNestedScrollingEnabled = false
+    }
+    companion object{
+        private const val TAG = "MainActivity"
     }
 
 
