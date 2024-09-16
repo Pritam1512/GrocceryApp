@@ -25,47 +25,47 @@ import com.example.layoutws.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: CartSingleItemBinding
+    private lateinit var binding: ActivityMainBinding
     private val mainViewModel : MainViewModel by viewModels()
     private lateinit var newList: ArrayList<cartItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = CartSingleItemBinding.inflate(layoutInflater) // inflate the layout
+        binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
 
-//        newList = arrayListOf() // create a list of cart items
-//        newList.add(cartItem("First"))
-//        newList.add(cartItem("Second"))
-//        newList.add(cartItem("Third"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        newList.add(cartItem("Fourth"))
-//        val mAdapater = CartAdapter(newList)
-//        val gridLayoutManager = GridLayoutManager(this, 3)
-//        binding.cartRV.layoutManager = gridLayoutManager
-//
-//        binding.cartRV.setHasFixedSize(true)
-//        binding.cartRV.adapter = mAdapater
-//
-//        // to disable scrolling of RV within the scrollview
-//        binding.cartRV.isNestedScrollingEnabled = false
+        newList = arrayListOf() // create a list of cart items
+        newList.add(cartItem("First"))
+        newList.add(cartItem("Second"))
+        newList.add(cartItem("Third"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        newList.add(cartItem("Fourth"))
+        val mAdapater = CartAdapter(newList)
+        val gridLayoutManager = GridLayoutManager(this, 3)
+        binding.cartRV.layoutManager = gridLayoutManager
+
+        binding.cartRV.setHasFixedSize(true)
+        binding.cartRV.adapter = mAdapater
+
+        // to disable scrolling of RV within the scrollview
+        binding.cartRV.isNestedScrollingEnabled = false
     }
 
 }
