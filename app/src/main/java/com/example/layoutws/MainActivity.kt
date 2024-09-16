@@ -11,61 +11,61 @@ import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.ButtonBarLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.layoutws.databinding.ActivityMainBinding
 import com.example.layoutws.databinding.ButtonLayoutBinding
+import com.example.layoutws.databinding.CartSingleItemBinding
 import com.example.layoutws.databinding.SingleProductItemBinding
 import com.example.layoutws.databinding.SubitemLayoutBinding
 import com.example.layoutws.viewmodel.MainViewModel
-import com.gtappdevelopers.kotlingfgproject.MyAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: CartSingleItemBinding
     private val mainViewModel : MainViewModel by viewModels()
-    lateinit var title:Array<String>
     private lateinit var newList: ArrayList<cartItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
+        binding = CartSingleItemBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
 
-        val mAdapater = MyAdapter(this, listOf(1,2,3,4,5,6,7,8,9,10,11,12,334,45,54,45,45,4235,6,57,6756))
-        binding.gridVW.adapter = mAdapater
-
-        mainViewModel.addOne()
-        mainViewModel.addOne()
-        mainViewModel.addOne()
-        Log.i("MainActivity"," "+ mainViewModel.getCount())
-
-        title = arrayOf(
-            "Title 1",
-            "Title 2",
-            "Title 3",
-            "Title 4",
-            "Title 5",
-            "Title 6",
-            "Title 7"
-        )
-        binding.cartRV.layoutManager = LinearLayoutManager(this)
-        binding.cartRV.setHasFixedSize(true)
-        newList = arrayListOf<cartItem>()
-        getAllData()
-        for(i in title){
-            val title = cartItem(i)
-            newList.add(title)
-
-        }
-
-        binding.addItemsInCartButton.setOnClickListener{
-            val title = cartItem("someRandomValue")
-            newList.add(title)
-            binding.cartRV.adapter = CartAdapter(newList)
-        }
+//        newList = arrayListOf() // create a list of cart items
+//        newList.add(cartItem("First"))
+//        newList.add(cartItem("Second"))
+//        newList.add(cartItem("Third"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        newList.add(cartItem("Fourth"))
+//        val mAdapater = CartAdapter(newList)
+//        val gridLayoutManager = GridLayoutManager(this, 3)
+//        binding.cartRV.layoutManager = gridLayoutManager
+//
+//        binding.cartRV.setHasFixedSize(true)
+//        binding.cartRV.adapter = mAdapater
+//
+//        // to disable scrolling of RV within the scrollview
+//        binding.cartRV.isNestedScrollingEnabled = false
     }
-    private fun getAllData() {
-        binding.cartRV.adapter = CartAdapter(newList)
-    }
+
 }

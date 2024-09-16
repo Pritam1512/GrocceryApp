@@ -24,6 +24,12 @@
         <item name="android:textSize">15dp</item>
         <item name="backgroundTint">#EFE9E9</item>
         <item name="android:textColor">#0E9E1C</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+    <style name="custom_style_button_cart" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">15dp</item>
+        <item name="backgroundTint">#0E9E1C</item>
+        <item name="android:textColor">#EFE9E9</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 </resources>
