@@ -36,8 +36,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         prepareDummyData()
+        setAdapters()
+        disbaleRecyclerViewScrolling()
+    }
 
-        // set cart adapter
+    private fun setAdapters() {
         val cAdapter = CartAdapter(cartList)
         binding.cartRV.layoutManager = LinearLayoutManager(this)
         binding.cartRV.setHasFixedSize(true)
@@ -48,15 +51,12 @@ class MainActivity : AppCompatActivity() {
         val mAdapater = ItemsAdapter(newList)
         val gridLayoutManager = GridLayoutManager(this, 3)
         binding.itemsRV.layoutManager = gridLayoutManager
-
         binding.itemsRV.setHasFixedSize(true)
         binding.itemsRV.adapter = mAdapater
-
-        disbaleRecyclerViewScrolling()
-
     }
+
     private fun prepareDummyData() {
-        newList = arrayListOf() // create a list of cart items
+        newList = arrayListOf() // create a list of items
         newList.add(cartItem("First"))
         newList.add(cartItem("Second"))
         newList.add(cartItem("Third"))
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         newList.add(cartItem("15th"))
         newList.add(cartItem("16th"))
 
-        cartList = arrayListOf()
+        cartList = arrayListOf() // create list of cart items
         cartList.add(SingleCartItems(0))
         cartList.add(SingleCartItems(1))
         cartList.add(SingleCartItems(2))
