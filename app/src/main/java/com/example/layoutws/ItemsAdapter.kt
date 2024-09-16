@@ -1,22 +1,20 @@
 package com.example.layoutws
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class ItemsAdapter(private val mList: ArrayList<cartItem>) : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cart_single_item, parent, false)
+            .inflate(R.layout.button_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -24,8 +22,15 @@ class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemsName = mList[position]
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground)
-        holder.descText.text = "Items Description"
+        holder.imageView.setImageResource(R.drawable.hotel_svgrepo_com)
+
+        holder.imageView.setOnClickListener {
+            Log.i("Adapter", "onBindViewHolder: Image Item clicked $position")
+        }
+        holder.button.setOnClickListener{
+            Log.i("Adapter", "onBindViewHolder: Button Item clicked $position")
+        }
+
     }
 
     // return the number of the items in the list
@@ -35,8 +40,8 @@ class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.
 
     // Holds the views for adding it to image and text
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.cartItemImage)
-        val descText :TextView = itemView.findViewById(R.id.cartItemText)
-        val button :Button = itemView.findViewById(R.id.cartItemButton)
+        val imageView: ImageView = itemView.findViewById(R.id.imageView1)
+        val button:Button = itemView.findViewById(R.id.button)
+
     }
 }
