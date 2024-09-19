@@ -23,9 +23,9 @@ class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemsName = mList[position]
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground)
-        holder.descText.text = "Items Description"
+        val items = mList[position]
+        holder.imageView.setImageResource(items.imageID)
+        holder.descText.text = items.desc
     }
 
     // return the number of the items in the list

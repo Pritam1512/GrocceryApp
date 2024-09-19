@@ -1,3 +1,3 @@
 package com.example.layoutws
 
-data class SingleCartItems(var index:Int)
+data class SingleCartItems(var imageID : Int,var desc:String,var price:Float)

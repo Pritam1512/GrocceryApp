@@ -1,10 +1,12 @@
 package com.example.layoutws
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private val mainViewModel : ItemCountViewModel by viewModels()
     private lateinit var newList: ArrayList<cartItem>
     private lateinit var cartList: ArrayList<SingleCartItems>
+    private lateinit var imageId: IntArray
+    private lateinit var description: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     private fun prepareDummyData() {
 
-        val imageId: IntArray = intArrayOf(
+        imageId = intArrayOf(
             R.drawable.chicken_food_thanksgiving_svgrepo_com,
             R.drawable.apple_svgrepo_com,
             R.drawable.banana_svgrepo_com__1_,
@@ -70,7 +74,7 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
             R.drawable.rice_svgrepo_com,
             R.drawable.hotel_svgrepo_com
         )
-        val description = arrayOf(
+        description = arrayOf(
             "Chicken",
             "Apple",
             "Banana",
@@ -96,28 +100,25 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         }
 
         cartList = arrayListOf() // create list of cart items
-        cartList.add(SingleCartItems(0))
-        cartList.add(SingleCartItems(1))
-        cartList.add(SingleCartItems(2))
-        cartList.add(SingleCartItems(2))
-
     }
 
     private fun disbaleRecyclerViewScrolling() {
         // to disable scrolling of RV within the scrollview
         binding.itemsRV.isNestedScrollingEnabled = false
     }
+
+    override fun onItemImageClick(position: Int) {
+        Toast.makeText(this,"Item image clicked $position",Toast.LENGTH_LONG).show()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onItemButtonClick(position: Int) {
+        Toast.makeText(this,"Item button clicked $position",Toast.LENGTH_LONG).show()
+        cartList.add(SingleCartItems(imageId[position],description[position],1.1f))
+        binding.cartRV.adapter?.notifyDataSetChanged()
+    }
     companion object{
         private const val TAG = "MainActivity"
     }
-
-    override fun onItemImageClick(position: Int) {
-        Toast.makeText(this,"Item image clicked",Toast.LENGTH_LONG).show()
-    }
-
-    override fun onItemButtonClick(position: Int) {
-        Toast.makeText(this,"Item button clicked",Toast.LENGTH_LONG).show()
-    }
-
 
 }
