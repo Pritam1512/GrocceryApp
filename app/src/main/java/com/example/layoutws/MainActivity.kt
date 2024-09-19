@@ -1,7 +1,5 @@
 package com.example.layoutws
 
-import android.app.Dialog
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,22 +9,20 @@ import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.widget.ButtonBarLayout
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.layoutws.databinding.ActivityMainBinding
-import com.example.layoutws.databinding.ButtonLayoutBinding
-import com.example.layoutws.databinding.CartSingleItemBinding
-import com.example.layoutws.databinding.SingleProductItemBinding
-import com.example.layoutws.databinding.SubitemLayoutBinding
-import com.example.layoutws.viewmodel.MainViewModel
+import com.example.layoutws.databinding.TapviewNewUiBinding
+import com.example.layoutws.viewmodel.ItemCountViewModel
+import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel : MainViewModel by viewModels()
+    private val mainViewModel : ItemCountViewModel by viewModels()
     private lateinit var newList: ArrayList<cartItem>
     private lateinit var cartList: ArrayList<SingleCartItems>
 
@@ -40,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         disbaleRecyclerViewScrolling()
     }
 
+
     private fun setAdapters() {
         val cAdapter = CartAdapter(cartList)
         binding.cartRV.layoutManager = LinearLayoutManager(this)
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // set items adapter
-        val mAdapater = ItemsAdapter(newList)
+        val mAdapater = ItemsAdapter(newList,this)
         val gridLayoutManager = GridLayoutManager(this, 3)
         binding.itemsRV.layoutManager = gridLayoutManager
         binding.itemsRV.setHasFixedSize(true)
@@ -112,6 +109,14 @@ class MainActivity : AppCompatActivity() {
     }
     companion object{
         private const val TAG = "MainActivity"
+    }
+
+    override fun onItemImageClick(position: Int) {
+        Toast.makeText(this,"Item image clicked",Toast.LENGTH_LONG).show()
+    }
+
+    override fun onItemButtonClick(position: Int) {
+        Toast.makeText(this,"Item button clicked",Toast.LENGTH_LONG).show()
     }
 
 

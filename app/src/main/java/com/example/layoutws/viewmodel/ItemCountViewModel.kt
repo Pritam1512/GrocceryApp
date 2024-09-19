@@ -4,22 +4,26 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
-    private var number = 0
+class ItemCountViewModel : ViewModel() {
+    private var number = 1
     private val myLiveData = MutableLiveData(1)
 
     fun addOne() {
         number++
+        setData()
     }
-    fun getCount(): Int {
-        return number
+    fun subtractOne() {
+        number--
+        setData()
     }
-
     fun getMyLiveData(): MutableLiveData<Int> {
         return myLiveData
     }
-    fun setData(data: Int) {
-        Log.i("MainViewModel", Thread.currentThread().name)
-        myLiveData.postValue(data)
+    private fun setData() {
+        myLiveData.postValue(number)
+    }
+    fun setDefaultValue(){
+        number=1
+        myLiveData.postValue(1)
     }
 }
