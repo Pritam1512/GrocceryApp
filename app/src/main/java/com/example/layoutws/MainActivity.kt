@@ -1,25 +1,19 @@
 package com.example.layoutws
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
-import android.widget.GridView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.layoutws.adapters.CartAdapter
+import com.example.layoutws.adapters.ItemsAdapter
+import com.example.layoutws.data.SingleCartItems
+import com.example.layoutws.data.cartItem
 import com.example.layoutws.databinding.ActivityMainBinding
-import com.example.layoutws.databinding.TapviewNewUiBinding
 import com.example.layoutws.viewmodel.ItemCountViewModel
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
@@ -109,6 +103,8 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     override fun onItemImageClick(position: Int) {
         Toast.makeText(this,"Item image clicked $position",Toast.LENGTH_LONG).show()
+        val intent = Intent(this, ItemInformationActivity::class.java)
+        startActivity(intent)
     }
 
     @SuppressLint("NotifyDataSetChanged")

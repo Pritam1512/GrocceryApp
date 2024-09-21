@@ -1,4 +1,4 @@
-package com.example.layoutws
+package com.example.layoutws.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.layoutws.R
+import com.example.layoutws.data.cartItem
 
-class ItemsAdapter(private val mList: ArrayList<cartItem>,private val listener:OnItemClickListener) : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
+class ItemsAdapter(private val mList: ArrayList<cartItem>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

@@ -1,15 +1,14 @@
-package com.example.layoutws
+package com.example.layoutws.adapters
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.layoutws.R
+import com.example.layoutws.data.SingleCartItems
 
 class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
