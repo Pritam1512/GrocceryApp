@@ -10,7 +10,13 @@ data class Products(
     val price: Float
 )
 class ItemsData {
+    init {
+        createAllDummy()
+    }
     companion object{
+        lateinit var UUIDToProductMap:MutableMap<String,Products>
+        lateinit var dummyProducts: MutableList<Products>
+
         private val imageId = intArrayOf(
             R.drawable.chicken_food_thanksgiving_svgrepo_com,
             R.drawable.apple_svgrepo_com,
@@ -46,22 +52,22 @@ class ItemsData {
         private val price = floatArrayOf(
             12f, 34.5f, 54.7f, 23f, 45.33f, 5f, 56f, 4f, 5.2f, 46f, 67f, 34.6f, 5f, 65f
         )
-        val dummyProducts = listOf(
-            Products(generateUUID(), imageId[0], description[0], price[0]),
-            Products(generateUUID(), imageId[1], description[1], price[1]),
-            Products(generateUUID(), imageId[2], description[2], price[2]),
-            Products(generateUUID(), imageId[3], description[3], price[3]),
-            Products(generateUUID(), imageId[4], description[4], price[4]),
-            Products(generateUUID(), imageId[5], description[5], price[5]),
-            Products(generateUUID(), imageId[6], description[6], price[6]),
-            Products(generateUUID(), imageId[7], description[7], price[7]),
-            Products(generateUUID(), imageId[8], description[8], price[8]),
-            Products(generateUUID(), imageId[9], description[9], price[9]),
-            Products(generateUUID(), imageId[10], description[10], price[10]),
-            Products(generateUUID(), imageId[11], description[11], price[11]),
-            Products(generateUUID(), imageId[12], description[12], price[12]),
-            Products(generateUUID(), imageId[13], description[13], price[13]),
-        )
+
+
+        fun createAllDummy(){
+
+            UUIDToProductMap = HashMap<String, Products>()
+            dummyProducts = ArrayList<Products>()
+            for(i in imageId.indices){
+                val uuid = generateUUID();
+                val dummyObject = createObject(uuid,i)
+                UUIDToProductMap[uuid] = dummyObject
+                dummyProducts.add(dummyObject)
+            }
+        }
+        private fun createObject(UUID: String,i:Int):Products{
+            return Products(UUID, imageId[i], description[i], price[i])
+        }
         private fun generateUUID():String{
             return UUID.randomUUID().toString()
         }

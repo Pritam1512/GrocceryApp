@@ -1,7 +1,7 @@
-[2024-09-25 16:55:50] [L] galaxy property is null or empty 
-[2024-09-25 16:55:50] [L] Non-GB Project : LayoutWS 
-[2024-09-25 16:55:50] [L] allprojects : project : app 
-[2024-09-25 16:55:50] [L] Non-GB Project : app 
-[2024-09-25 16:55:50] [D] gradle projects loaded 
-[2024-09-25 16:55:50] [L] Maven repo base URL : null 
-[2024-09-25 16:55:51] [D] gradle projects evaluated 
+[2024-09-25 17:45:43] [L] galaxy property is null or empty 
+[2024-09-25 17:45:43] [L] Non-GB Project : LayoutWS 
+[2024-09-25 17:45:43] [L] allprojects : project : app 
+[2024-09-25 17:45:43] [L] Non-GB Project : app 
+[2024-09-25 17:45:43] [D] gradle projects loaded 
+[2024-09-25 17:45:43] [L] Maven repo base URL : null 
+[2024-09-25 17:45:45] [D] gradle projects evaluated 

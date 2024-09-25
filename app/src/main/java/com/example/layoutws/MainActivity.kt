@@ -22,14 +22,14 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private val mainViewModel : ItemCountViewModel by viewModels()
     private lateinit var newList: ArrayList<cartItem>
     private lateinit var cartList: ArrayList<SingleCartItems>
-    private lateinit var imageId: IntArray
-    private lateinit var description: Array<String>
+    private lateinit var itemsData: ItemsData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
 
+        itemsData = ItemsData()
         prepareDummyData()
         setAdapters()
         disbaleRecyclerViewScrolling()
@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onItemButtonClick(position: Int) {
-//        Toast.makeText(this,"Item button clicked $position ${newList[position].UUID}",Toast.LENGTH_LONG).show()
 
         var flag = 0
         for(items in cartList){
@@ -87,13 +86,14 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
                 flag = 1
             }
         }
-        if(flag == 0)
+        if(flag == 0){
             cartList.add(SingleCartItems(
-            ItemsData.dummyProducts[position].productId,
-            ItemsData.dummyProducts[position].imageId,
-            ItemsData.dummyProducts[position].desc,
-            ItemsData.dummyProducts[position].price))
-        binding.cartRV.adapter?.notifyDataSetChanged()
+                ItemsData.dummyProducts[position].productId,
+                ItemsData.dummyProducts[position].imageId,
+                ItemsData.dummyProducts[position].desc,
+                ItemsData.dummyProducts[position].price))
+                binding.cartRV.adapter?.notifyDataSetChanged()
+        }
     }
     companion object{
         private const val TAG = "MainActivity"
