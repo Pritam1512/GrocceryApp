@@ -12,6 +12,7 @@ import com.example.layoutws.adapters.CartAdapter
 import com.example.layoutws.adapters.ItemsAdapter
 import com.example.layoutws.data.SingleCartItems
 import com.example.layoutws.data.cartItem
+import com.example.layoutws.database.ItemsData
 import com.example.layoutws.databinding.ActivityMainBinding
 import com.example.layoutws.viewmodel.ItemCountViewModel
 
@@ -52,45 +53,13 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     private fun prepareDummyData() {
 
-        imageId = intArrayOf(
-            R.drawable.chicken_food_thanksgiving_svgrepo_com,
-            R.drawable.apple_svgrepo_com,
-            R.drawable.banana_svgrepo_com__1_,
-            R.drawable.burger_1_svgrepo_com,
-            R.drawable.chips_snack_svgrepo_com,
-            R.drawable.coke_svgrepo_com,
-            R.drawable.cookies_svgrepo_com,
-            R.drawable.fish_svgrepo_com,
-            R.drawable.fries_svgrepo_com,
-            R.drawable.tomato_svgrepo_com,
-            R.drawable.pizza_svgrepo_com,
-            R.drawable.omelette_svgrepo_com,
-            R.drawable.rice_svgrepo_com,
-            R.drawable.hotel_svgrepo_com
-        )
-        description = arrayOf(
-            "Chicken",
-            "Apple",
-            "Banana",
-            "Burger",
-            "Chips",
-            "Coke",
-            "Cookies",
-            "Fish",
-            "Fries",
-            "Tomato",
-            "Pizza",
-            "Omelette",
-            "rice",
-            "Hotel"
-        )
-        val price = arrayOf(
-            12,34.5,54.7,23,45.33,5,56,4,5.2,46,67,34.6,5,65
-        )
-
         newList = arrayListOf() // create a list of items
-        for(i in imageId.indices) {
-            newList.add(cartItem(imageId[i],description[i],price[i].toFloat()))
+        for(i in ItemsData.dummyProducts.indices) {
+            newList.add(cartItem(
+                ItemsData.dummyProducts[i].productId,
+                ItemsData.dummyProducts[i].imageId,
+                ItemsData.dummyProducts[i].desc,
+                ItemsData.dummyProducts[i].price))
         }
 
         cartList = arrayListOf() // create list of cart items
@@ -109,8 +78,21 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onItemButtonClick(position: Int) {
-        Toast.makeText(this,"Item button clicked $position",Toast.LENGTH_LONG).show()
-        cartList.add(SingleCartItems(imageId[position],description[position],1.1f))
+//        Toast.makeText(this,"Item button clicked $position ${newList[position].UUID}",Toast.LENGTH_LONG).show()
+
+        var flag = 0
+        for(items in cartList){
+            if(items.cartUUID == newList[position].UUID) {
+                Toast.makeText(this,"Item already present",Toast.LENGTH_LONG).show()
+                flag = 1
+            }
+        }
+        if(flag == 0)
+            cartList.add(SingleCartItems(
+            ItemsData.dummyProducts[position].productId,
+            ItemsData.dummyProducts[position].imageId,
+            ItemsData.dummyProducts[position].desc,
+            ItemsData.dummyProducts[position].price))
         binding.cartRV.adapter?.notifyDataSetChanged()
     }
     companion object{
