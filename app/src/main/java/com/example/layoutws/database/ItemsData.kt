@@ -1,5 +1,6 @@
 package com.example.layoutws.database
 
+import android.util.Log
 import com.example.layoutws.R
 import java.util.UUID
 
@@ -64,6 +65,7 @@ class ItemsData {
                 UUIDToProductMap[uuid] = dummyObject
                 dummyProducts.add(dummyObject)
             }
+            Log.d(TAG,"Map :: ${UUIDToProductMap.toString()}")
         }
         private fun createObject(UUID: String,i:Int):Products{
             return Products(UUID, imageId[i], description[i], price[i])
@@ -71,5 +73,6 @@ class ItemsData {
         private fun generateUUID():String{
             return UUID.randomUUID().toString()
         }
+        private const val TAG = "ItemsData"
     }
 }
