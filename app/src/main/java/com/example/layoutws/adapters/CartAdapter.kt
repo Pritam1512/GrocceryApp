@@ -1,5 +1,6 @@
 package com.example.layoutws.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.layoutws.R
 import com.example.layoutws.data.SingleCartItems
 
-class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(private val mList: ArrayList<SingleCartItems>,private val listener: OnCartItemClickListener) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -19,12 +20,18 @@ class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.
         return ViewHolder(view)
     }
 
+
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val items = mList[position]
         holder.imageView.setImageResource(items.imageID)
         holder.descText.text = items.desc
+
+        holder.button.setOnClickListener{
+            Log.i("CartAdapter","Remove button clicked")
+            listener.onCartItemButtonClick(position)
+        }
     }
 
     // return the number of the items in the list
@@ -37,5 +44,9 @@ class CartAdapter(private val mList: ArrayList<SingleCartItems>) : RecyclerView.
         val imageView: ImageView = itemView.findViewById(R.id.cartItemImage)
         val descText :TextView = itemView.findViewById(R.id.cartItemText)
         val button :Button = itemView.findViewById(R.id.cartItemButton)
+    }
+
+    interface OnCartItemClickListener {
+        fun onCartItemButtonClick(position: Int)
     }
 }
