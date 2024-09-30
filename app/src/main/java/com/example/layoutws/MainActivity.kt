@@ -22,7 +22,7 @@ import com.example.layoutws.viewmodel.ItemCountViewModel
 class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAdapter.OnCartItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val cartItemsViewModel: CartItemsViewModel by viewModels()
+    private val cartItemsViewModel: CartItemsViewModel by viewModels() // view model instance
     private lateinit var newList: ArrayList<cartItem>
     private lateinit var cartList: ArrayList<SingleCartItems>
     private lateinit var itemsData: ItemsData

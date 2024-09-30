@@ -15,8 +15,8 @@ class ItemsData {
         createAllDummy()
     }
     companion object{
-        lateinit var UUIDToProductMap:MutableMap<String,Products>
-        lateinit var dummyProducts: MutableList<Products>
+        var UUIDToProductMap:MutableMap<String,Products> =  HashMap<String, Products>()
+        var dummyProducts: MutableList<Products> = ArrayList<Products>()
 
         private val imageId = intArrayOf(
             R.drawable.chicken_food_thanksgiving_svgrepo_com,
@@ -32,7 +32,14 @@ class ItemsData {
             R.drawable.pizza_svgrepo_com,
             R.drawable.omelette_svgrepo_com,
             R.drawable.rice_svgrepo_com,
-            R.drawable.hotel_svgrepo_com
+            R.drawable.hotel_svgrepo_com,
+            R.drawable.avacado_svgrepo_com,
+            R.drawable.avacado_food_fruit_svgrepo_com,
+            R.drawable.carrot_svgrepo_com,
+            R.drawable.cherries_cherry_fruit_food_svgrepo_com,
+            R.drawable.cupcake_svgrepo_com,
+            R.drawable.milk_svgrepo_com__1_,
+            R.drawable.noodles_pasta_svgrepo_com
         )
         private val description = arrayOf(
             "Chicken",
@@ -48,10 +55,17 @@ class ItemsData {
             "Pizza",
             "Omelette",
             "rice",
-            "Hotel"
+            "Hotel",
+            "Avocado",
+            "Ripe Avocado",
+            "Carrot",
+            "Cherries",
+            "Cupcake",
+            "Milk",
+            "Noodles"
         )
         private val price = floatArrayOf(
-            12f, 34.5f, 54.7f, 23f, 45.33f, 5f, 56f, 4f, 5.2f, 46f, 67f, 34.6f, 5f, 65f
+            12f, 34.5f, 54.7f, 23f, 45.33f, 5f, 56f, 4f, 5.2f, 46f, 67f, 34.6f, 5f, 65f, 76f,4f,6f,7f,5f,1.3f,4.6f
         )
 
 
@@ -65,7 +79,7 @@ class ItemsData {
                 UUIDToProductMap[uuid] = dummyObject
                 dummyProducts.add(dummyObject)
             }
-            Log.d(TAG,"Map :: ${UUIDToProductMap.toString()}")
+            Log.i(TAG,"Map :: ${UUIDToProductMap},${dummyProducts}")
         }
         private fun createObject(UUID: String,i:Int):Products{
             return Products(UUID, imageId[i], description[i], price[i])
