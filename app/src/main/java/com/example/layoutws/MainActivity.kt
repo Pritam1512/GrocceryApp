@@ -18,6 +18,7 @@ import com.example.layoutws.database.ItemsData
 import com.example.layoutws.databinding.ActivityMainBinding
 import com.example.layoutws.viewmodel.CartItemsViewModel
 import com.example.layoutws.viewmodel.ItemCountViewModel
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAdapter.OnCartItemClickListener {
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAd
     private lateinit var itemsData: ItemsData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate called")
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
@@ -35,11 +37,25 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAd
         itemsData = ItemsData()
         prepareDummyData()
         setAdapters()
+
+        setUpCartItemsFromIntent()
         setUpCartObservers()
         disbaleRecyclerViewScrolling()
     }
-
-
+    private fun setUpCartItemsFromIntent(){
+        Log.i(TAG, "setUpCartItemsFromIntent called")
+        // update the viewmodel with the items from the intent
+        val itemsHashArrayFromIntent = intent.getStringArrayListExtra("items_hash_array")
+        if (itemsHashArrayFromIntent != null) {
+            Log.i(TAG,"array size :: ${itemsHashArrayFromIntent?.size}")
+            for (item in itemsHashArrayFromIntent) {
+                Log.i(TAG,"items from previous activity $item")
+                cartItemsViewModel.addItemsInCart(item)
+            }
+        } else{
+            Log.i("MainActivity", "No items from previous activity")
+        }
+    }
     private fun setAdapters() {
         val cAdapter = CartAdapter(cartList, this)
         binding.cartRV.layoutManager = LinearLayoutManager(this)
@@ -116,13 +132,6 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAd
         }
         if (flag == 0) {
             cartItemsViewModel.addItemsInCart(newList[position].UUID)
-            // instead of notifying the adapter, make use of view model
-//            cartList.add(SingleCartItems(
-//                ItemsData.dummyProducts[position].productId,
-//                ItemsData.dummyProducts[position].imageId,
-//                ItemsData.dummyProducts[position].desc,
-//                ItemsData.dummyProducts[position].price))
-//                binding.cartRV.adapter?.notifyDataSetChanged()
         }
     }
 

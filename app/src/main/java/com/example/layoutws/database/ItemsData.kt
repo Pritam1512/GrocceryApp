@@ -70,7 +70,7 @@ class ItemsData {
 
 
         fun createAllDummy(){
-
+            Log.i(TAG,"Creating Dummy Data...")
             UUIDToProductMap = HashMap<String, Products>()
             dummyProducts = ArrayList<Products>()
             for(i in imageId.indices){
