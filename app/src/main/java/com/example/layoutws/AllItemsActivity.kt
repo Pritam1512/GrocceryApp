@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -23,7 +24,7 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private lateinit var binding:AllItemActivityBinding
     private lateinit var newList: ArrayList<cartItem>
     private val smallCartItemsViewModel : SmallCartItemsViewModel by viewModels<SmallCartItemsViewModel>()
-    
+    private lateinit var smallCartHashSet: HashSet<String>
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,9 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         binding = AllItemActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ItemsData.createAllDummy()
+        ItemsData.funCreateAllDummy()
+        smallCartHashSet = HashSet()
+
         prepareDummyData()
         setAllItemAdapters()
         handleCartButtonVisibility()
@@ -79,7 +82,7 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
                 )
             )
         }
-        Log.i(TAG, "NewList $newList")
+        Log.i(TAG, " Map :: ${ItemsData.UUIDToProductMap}")
     }
     private fun disbaleRecyclerViewScrolling() {
         // to disable scrolling of RV within the scrollview
@@ -95,9 +98,14 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     override fun onItemButtonClick(position: Int) {
         Log.i(TAG,"Button Clicked at position $position")
         // add this item to smallcartviewmodel
-        binding.floatingCartImage.setImageResource(newList[position].imageID)
-        smallCartItemsViewModel.addItemsInSmallCart(newList[position].UUID)
 
+        if (!smallCartHashSet.contains(newList[position].UUID)) {
+            binding.floatingCartImage.setImageResource(newList[position].imageID)
+            smallCartItemsViewModel.addItemsInSmallCart(newList[position].UUID)
+            smallCartHashSet.add(newList[position].UUID)
+        } else {
+            Toast.makeText(this, "Item already present", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object{

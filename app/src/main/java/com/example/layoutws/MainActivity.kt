@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAd
         binding = ActivityMainBinding.inflate(layoutInflater) // inflate the layout
         setContentView(binding.root)
 
-        itemsData = ItemsData()
         prepareDummyData()
         setAdapters()
 
