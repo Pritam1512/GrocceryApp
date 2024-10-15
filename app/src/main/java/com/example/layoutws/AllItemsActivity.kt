@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.layoutws.adapters.CartAdapter
 import com.example.layoutws.adapters.ItemsAdapter
+import com.example.layoutws.data.GlobalCartData
 import com.example.layoutws.data.SingleCartItems
 import com.example.layoutws.data.cartItem
 import com.example.layoutws.database.ItemsData
@@ -42,15 +43,13 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         setUpSmallCartObservers()
 
         binding.floatingCartView.setOnClickListener {
-            Log.i(TAG,"Floating cart clicked, ${smallCartItemsViewModel.getSmallCartItemArray()}")
             val cartActivityIntent = Intent(this, MainActivity::class.java)
-            cartActivityIntent.putExtra("items_hash_array",smallCartItemsViewModel.getSmallCartItemArray())
             startActivity(cartActivityIntent)
         }
     }
     private fun setUpSmallCartObservers() {
-        smallCartItemsViewModel.getSmallCartItems().observe(this, Observer {
-            Log.i("MainActivity", ":: small Cart data changed")
+        smallCartItemsViewModel.cartItems.observe(this, Observer {
+            Log.i(TAG, ":: small Cart data changed")
             if(it.isNotEmpty()){
                 binding.floatingCartView.visibility = View.VISIBLE
             }
@@ -106,6 +105,7 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         } else {
             Toast.makeText(this, "Item already present", Toast.LENGTH_LONG).show()
         }
+        Log.i(TAG,"Items in singleton ${GlobalCartData.getCartList()}")
     }
 
     companion object{

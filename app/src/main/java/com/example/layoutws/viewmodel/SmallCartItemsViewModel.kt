@@ -1,30 +1,23 @@
 package com.example.layoutws.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.layoutws.data.GlobalCartData
 
 class SmallCartItemsViewModel : ViewModel() {
-    private var cartItemList = MutableLiveData<List<String>>();
-    private var cartItems = ArrayList<String>()
+    private val _cartItemList = MutableLiveData<List<String>>();
+    val cartItems : LiveData<List<String>> get() = _cartItemList
+    private val TAG = "SmallCartItemsViewModel"
 
+    init {
+        Log.i(TAG, "SmallCartItemsViewModel created")
+        _cartItemList.value = GlobalCartData.getCartList()
+    }
 
     fun addItemsInSmallCart(itemHash: String){
-        cartItems.add(itemHash)
-        cartItemList.postValue(cartItems)
-
-    }
-    fun getSmallCartItems() : MutableLiveData<List<String>> {
-        return cartItemList
-    }
-    fun getSmallCartItemArray() : ArrayList<String>{
-        return cartItems
-    }
-    fun deleteSmallCartItem(itemHash:String){
-        cartItems.remove(itemHash)
-        cartItemList.postValue(cartItems)
-    }
-    fun clearSmallCart(){
-        cartItems.clear()
-        cartItemList.postValue(cartItems)
+        GlobalCartData.addToCart(itemHash)
+        _cartItemList.value = GlobalCartData.getCartList()
     }
 }
