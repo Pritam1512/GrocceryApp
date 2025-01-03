@@ -1,5 +1,6 @@
 package com.example.layoutws
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,7 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private lateinit var smallCartHashSet: HashSet<String>
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "OnCreate()")
         super.onCreate(savedInstanceState)
         
         binding = AllItemActivityBinding.inflate(layoutInflater)
@@ -50,8 +52,10 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private fun setUpSmallCartObservers() {
         smallCartItemsViewModel.cartItems.observe(this, Observer {
             Log.i(TAG, ":: small Cart data changed")
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 binding.floatingCartView.visibility = View.VISIBLE
+            } else {
+                binding.floatingCartView.visibility = View.GONE
             }
             for(itemhash in it){
                 Log.i(TAG,"Item ${ItemsData.UUIDToProductMap[itemhash]}")
@@ -108,6 +112,15 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         Log.i(TAG,"Items in singleton ${GlobalCartData.getCartList()}")
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onResume() {
+        Log.i(TAG, "OnResume()")
+        Log.i(TAG,"Items in singleton ${GlobalCartData.getCartList()}")
+        if(GlobalCartData.getCartList().size == 0){
+            binding.floatingCartView.visibility = View.GONE
+        }
+        super.onResume()
+    }
     companion object{
         private const val TAG = "AllItemsActivity"
     }

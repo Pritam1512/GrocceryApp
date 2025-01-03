@@ -73,9 +73,11 @@ class MainActivity : AppCompatActivity(),ItemsAdapter.OnItemClickListener,CartAd
     private fun setUpCartObservers() {
         cartItemsViewModel.cartItemsList.observe(this, Observer {
 
-            Log.i("MainActivity", ":: Cart data changed")
+            Log.i(TAG, ":: Cart data changed")
             var tempListArray = ArrayList<SingleCartItems>()
-
+            for(itemhash in it){
+                Log.i(TAG,"Item in cart = ${ItemsData.UUIDToProductMap[itemhash]}")
+            }
             for (itemsHash in it) {
                 tempListArray.add(
                     SingleCartItems(
