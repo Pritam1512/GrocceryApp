@@ -26,7 +26,6 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
     private lateinit var binding:AllItemActivityBinding
     private lateinit var newList: ArrayList<cartItem>
     private val smallCartItemsViewModel : SmallCartItemsViewModel by viewModels<SmallCartItemsViewModel>()
-    private lateinit var smallCartHashSet: HashSet<String>
     
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "OnCreate()")
@@ -36,7 +35,6 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         setContentView(binding.root)
 
         ItemsData.funCreateAllDummy()
-        smallCartHashSet = HashSet()
 
         prepareDummyData()
         setAllItemAdapters()
@@ -102,16 +100,23 @@ class AllItemsActivity: AppCompatActivity(),ItemsAdapter.OnItemClickListener {
         Log.i(TAG,"Button Clicked at position $position")
         // add this item to smallcartviewmodel
 
-        if (!smallCartHashSet.contains(newList[position].UUID)) {
+        if (!isDataAlreadyAvailableInGlobal(newList[position].UUID)) {
             binding.floatingCartImage.setImageResource(newList[position].imageID)
             smallCartItemsViewModel.addItemsInSmallCart(newList[position].UUID)
-            smallCartHashSet.add(newList[position].UUID)
         } else {
             Toast.makeText(this, "Item already present", Toast.LENGTH_LONG).show()
         }
         Log.i(TAG,"Items in singleton ${GlobalCartData.getCartList()}")
     }
 
+    private fun isDataAlreadyAvailableInGlobal(uuid: String):Boolean{
+        for (item in GlobalCartData.getCartList()) {
+            if (item == uuid) {
+                return true
+            }
+        }
+        return false;
+    }
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         Log.i(TAG, "OnResume()")
