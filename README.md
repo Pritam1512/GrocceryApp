@@ -2,7 +2,7 @@ Supported functionalities
 
 To-Do items
 1. When cart cleared from mainActivity(cartlist shown), it is not updated in AllItemsActivity.
-     Expected - Floating cart should be invisible, as no items are there in the cart right now
+     Expected - Floating cart should be invisible, as no items are there in the cart right now (DONE)
 
 2. Removed from cart (item1) from MainActivity, try to add same item(item1) from AllItemsActivity.
      Expected - Items should get added in the cart.
